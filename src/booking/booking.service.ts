@@ -17,7 +17,7 @@ export class BookingService {
 
     try {
       const result = await queryRunner.query(
-        `INSERT INTO bookings (name, date, details) VALUES (?, ?, ?)`,
+        `INSERT INTO booking (name, date, details) VALUES (?, ?, ?)`,
         [
           createBookingDto.name,
           createBookingDto.date,
@@ -35,7 +35,7 @@ export class BookingService {
     await queryRunner.connect();
 
     try {
-      const bookings = await queryRunner.query('SELECT * FROM bookings');
+      const bookings = await queryRunner.query('SELECT * FROM booking');
       return bookings;
     } finally {
       await queryRunner.release();
@@ -48,7 +48,7 @@ export class BookingService {
 
     try {
       const booking = await queryRunner.query(
-        'SELECT * FROM bookings WHERE id = ?',
+        'SELECT * FROM booking WHERE id = ?',
         [id],
       );
       return booking[0]; // Return the first result
@@ -63,7 +63,7 @@ export class BookingService {
 
     try {
       const result = await queryRunner.query(
-        `UPDATE bookings SET name = ?, date = ?, details = ? WHERE id = ?`,
+        `UPDATE booking SET name = ?, date = ?, details = ? WHERE id = ?`,
         [
           updateBookingDto.name,
           updateBookingDto.date,
@@ -83,7 +83,7 @@ export class BookingService {
 
     try {
       const result = await queryRunner.query(
-        'DELETE FROM bookings WHERE id = ?',
+        'DELETE FROM booking WHERE id = ?',
         [id],
       );
       return result;
